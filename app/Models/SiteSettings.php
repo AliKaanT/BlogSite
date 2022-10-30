@@ -10,4 +10,12 @@ class SiteSettings extends Model
     use HasFactory;
     protected $table = 'site_settings';
 
+    protected $fillable = [
+        'title',
+        'favicon_path',
+        'logo_img_path',
+        'description',
+        'meta_tags',
+        'social_medias',
+    ];
 }

@@ -19,7 +19,7 @@ return new class extends Migration {
             $table->string('favicon_path')->nullable();
             $table->longText('description')->nullable();
             $table->json('meta_tags')->nullable();
-            $table->json('social_media')->nullable();
+            $table->json('social_medias')->nullable();
             $table->timestamps();
         });
     }

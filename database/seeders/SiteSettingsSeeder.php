@@ -30,7 +30,7 @@ class SiteSettingsSeeder extends Seeder
                 '<meta name="viewport" content="width=device-width, initial-scale=1.0">',
                 '<meta http-equiv="X-UA-Compatible" content="ie=edge">',
             ]),
-            'social_media' => json_encode([
+            'social_medias' => json_encode([
                 'facebook' => 'https://www.facebook.com',
                 'twitter' => 'https://twitter.com',
                 'instagram' => 'https://instagram.com',

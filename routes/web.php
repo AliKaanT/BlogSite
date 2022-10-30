@@ -1,11 +1,13 @@
 <?php
 
 use App\Models\User;
+use App\Models\SiteSettings;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\PanelViewController;
+use App\Http\Controllers\Admin\PanelViewController;
+use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\SiteSettingsController;
 
 /*
  |--------------------------------------------------------------------------
@@ -19,13 +21,28 @@ use App\Http\Controllers\PanelViewController;
  */
 
 //REQUESTS WHICH RETURNS VIEW
-Route::get('panel', [PanelViewController::class, 'index']);
-Route::get('panel/login', [PanelViewController::class, 'login']);
-Route::get('panel/settings', [PanelViewController::class, 'settings']);
+Route::get('panel/login', [PanelViewController::class, 'login'])->name('login');
 
 //POST REQUESTS
-Route::post('post/login', [AuthController::class, 'login']);
+Route::post('panel/login', [AuthController::class, 'login']);
 
 Route::post('post/settings', function (Request $request) {
     return $request;
 });
+
+Route::group(['prefix' => 'panel', 'as' => 'panel.', 'middleware' => ['auth:admin']], function () {
+
+    //Get requests
+    Route::get('/', [PanelViewController::class, 'index'])->name('panel');
+    Route::get('/settings', [PanelViewController::class, 'settings'])->name('settings');
+    Route::get('/pages', [ /***********************************/])->name('pages');
+    Route::get('/categories', [ /***********************************/])->name('categories');
+    Route::get('/posts', [ /***********************************/])->name('posts');
+
+
+    // Post requests
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::post('/settings', [SiteSettingsController::class, 'update'])->name('settings_post');
+});
+
+// title slug content image created updated
