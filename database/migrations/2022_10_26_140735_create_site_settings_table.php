@@ -15,7 +15,7 @@ return new class extends Migration {
         Schema::create('site_settings', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('logo_img_path')->nullable();
+            $table->string('logo_path')->nullable();
             $table->string('favicon_path')->nullable();
             $table->longText('description')->nullable();
             $table->json('meta_tags')->nullable();

@@ -17,8 +17,8 @@ class SiteSettingsSeeder extends Seeder
     {
         SiteSettings::create([
             'title' => 'Blog Sitesi',
-            'favicon_path' => 'favicon.ico',
-            'logo_img_path' => 'logo.png',
+            'favicon_path' => 'admin/site/img/favicon.ico',
+            'logo_path' => 'admin/site/img/logo.png',
             'description' => 'Lorem ipsum dolor sit amet, consectetur adip, sed diam euismod sed diam ea rebum. Ut enim ad minim veniam',
             // 'meta_tags' => json_encode([
             //     ['name' => 'viewport', 'content' => "width=device-width, initial-scale=1.0"],

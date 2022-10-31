@@ -6,13 +6,12 @@ use App\Models\SiteSettings;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+
 class PanelViewController extends Controller
 {
     public function index()
     {
-        $meta = SiteSettings::select('meta_tags')->first();
-        $metatag =  json_decode($meta->meta_tags);
-        return view('panel/index',compact('metatag'));
+        return view('panel/index');
     }
 
     public function settings()

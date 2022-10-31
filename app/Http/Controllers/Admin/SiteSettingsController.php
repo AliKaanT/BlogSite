@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Illuminate\Support\Str;
 use App\Models\SiteSettings;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rules\File as FileValidator;
 
 class SiteSettingsController extends Controller
 {
@@ -17,7 +21,7 @@ class SiteSettingsController extends Controller
          
          "favicon_path": "favicon.ico",
          
-         "logo_img_path": "logo.png",
+         "logo_path": "logo.png",
          
          "description": "Lorem ipsum dolor sit amet, consectetur adip, sed diam euismod sed diam ea rebum. Ut enim ad minim veniam",
          
@@ -30,7 +34,31 @@ class SiteSettingsController extends Controller
          "social_media_value_8": "https://instagram.com"
          
          */
+        
+        $validation = Validator::make($request->all(), [
+            'logo' => ['required', FileValidator::types(['png', 'jpg', 'jpeg'])],
+            'favicon' => ['required', FileValidator::types(['ico'])],
+        ]);
+        
+        $newSettings = SiteSettings::find(1);
+        
+        if ($request['logo']) {
+            $randomName = (Str::random(16) . "." . $request['logo']->extension());
+            $logo_path = ('admin/site/img/' . $randomName);
+            File::move($request['logo']->getPathName(), public_path($logo_path));
+            // $logo_path = $request->file('logo')->storeAs('public/uploads', $randomName);
+            $newSettings['logo_path'] = $logo_path;
 
+        }
+        if ($request['favicon']) {
+            $randomName = (Str::random(16) . "." . $request['favicon']->extension());
+            $favicon_path = ('admin/site/img/' . $randomName);
+            File::move($request['favicon']->getPathName(), public_path($favicon_path));
+            // $favicon_path = $request->file('favicon')->storeAs('public/uploads', $randomName);
+            $newSettings['favicon_path'] = $favicon_path;
+        }
+
+        /************************************************ */
         $meta_tags = array();
         $social_medias = array();
 
@@ -43,14 +71,13 @@ class SiteSettingsController extends Controller
             }
         }
 
-        SiteSettings::find(1)->update([
-            'title' => $request['title'],
-            'favicon_path' => $request['favicon_path'],
-            'logo_img_path' => $request['logo_img_path'],
-            'description' => $request['description'],
-            'meta_tags' => json_encode($meta_tags),
-            'social_medias' => json_encode($social_medias),
-        ]);
+
+        $newSettings['title'] = $request['title'];
+        $newSettings['description'] = $request['description'];
+        $newSettings['meta_tags'] = json_encode($meta_tags);
+        $newSettings['social_medias'] = json_encode($social_medias);
+
+        $newSettings->save();
 
         return redirect()->back();
     }

@@ -21,27 +21,6 @@
 
     <!-- Divider -->
     <hr class="sidebar-divider">
-
-    <!-- Heading -->
-    <div class="sidebar-heading">
-        Site
-    </div>
-
-    <li class="nav-item active">
-        <a class="nav-link" href="{{ route('panel.settings') }}">
-            <i class="fas fa-fw fa-cog"></i>
-            <span>Ayarlar</span></a>
-    </li>
-
-    <li class="nav-item active">
-        <a class="nav-link" href="{{route('panel.pages')}}">
-            <i class="fas fa-fw fa-file"></i>
-            <span>Sayfalar</span></a>
-    </li>
-
-    <!-- Divider -->
-    <hr class="sidebar-divider">
-
     <!-- Heading -->
     <div class="sidebar-heading">
         İçerik
@@ -50,19 +29,40 @@
     <!-- Nav Item - Pages Collapse Menu -->
 
 
-    <!-- Nav Item - Charts -->
-    <li class="nav-item">
-        <a class="nav-link" href="{{route('panel.categories')}}">
+    <!-- Nav Item - Kategoriler -->
+    <li class="nav-item active">
+        <a class="nav-link" href="{{ route('panel.categories') }}">
             <i class="fas fa-fw fa-list-ul"></i>
             <span>Kategoriler</span></a>
     </li>
 
-    <!-- Nav Item - Tables -->
-    <li class="nav-item">
-        <a class="nav-link" href="{{route('panel.posts')}}">
+    <!-- Nav Item - Gönderiler -->
+    <li class="nav-item active">
+        <a class="nav-link" href="{{ route('panel.posts') }}">
             <i class="fas fa-fw fa-camera"></i>
             <span>Gönderiler</span></a>
     </li>
+
+    <hr class="sidebar-divider">
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        Site
+    </div>
+
+
+    <li class="nav-item ">
+        <a class="nav-link" href="{{ route('panel.pages') }}">
+            <i class="fas fa-fw fa-file"></i>
+            <span>Sayfalar</span></a>
+    </li>
+    <li class="nav-item ">
+        <a class="nav-link" href="{{ route('panel.settings') }}">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Ayarlar</span></a>
+    </li>
+
+    <!-- Divider -->
+
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">

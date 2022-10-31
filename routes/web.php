@@ -21,7 +21,7 @@ use App\Http\Controllers\Admin\SiteSettingsController;
  */
 
 //REQUESTS WHICH RETURNS VIEW
-Route::get('panel/login', [PanelViewController::class, 'login'])->name('login');
+Route::get('panel/login', [PanelViewController::class, 'login'])->name('login')->middleware('guest');
 
 //POST REQUESTS
 Route::post('panel/login', [AuthController::class, 'login']);

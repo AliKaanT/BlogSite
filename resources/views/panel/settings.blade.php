@@ -1,14 +1,61 @@
 @extends('panel.layouts.app')
 
+@section('extra_header_tags')
+    <link rel="stylesheet" href="{{ asset('admin/vendor/dropify/dropify.css') }}">
+@endsection
+
+@section('extra_footer_tags')
+    <script src="{{ asset('admin/vendor/dropify/dropify.js') }}"></script>
+    <script>
+        $('.show-dropify').on('click', (e) => {
+            // let new_img = e.target.parentNode.parentNode.children[2];
+
+            // new_img
+
+            // console.log(new_img)
+            // console.log(prev_img)
+            let parent = e.target.parentNode.parentNode;
+            let div = document.createElement("div");
+            div.innerHTML = `       
+                        <input name="${e.target.dataset.name}" class="form-control mb-2 dropify" data-height="100" type='file'>
+                        <button type="button" class="btn btn-sm btn-outline-danger" onclick="remove_parent(this)" >İptal X</button>
+                        `
+            div.setAttribute("class", 'col');
+            parent.appendChild(div);
+            $('.dropify').dropify();
+        })
+    </script>
+@endsection
+
 @section('content')
     <div class="pt-5 container d-flex justify-content-center my-5">
         <div class="w-75">
 
-            <form action="{{ route('panel.settings_post') }}" method="POST">
+            <form enctype="multipart/form-data" action="{{ route('panel.settings_post') }}" method="POST" target="__blank">
+
+                {{-- <input class="form-control mb-2 dropify" type='file'> --}}
+
+
+                <div class="border p-1" id="favicon">
+                    <div class="px-3 row">Favicon</div>
+                    <div class="px-3 row">
+                        <div class="col-3">
+                            <img src="{{ asset($settings['favicon_path']) }}" alt="favicon" height="100px">
+                            <button type="button" class="btn btn-sm btn-outline-primary show-dropify" data-name="favicon">Değiştir</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="border p-1" id="logo">
+                    <div class="px-3 row">Logo</div>
+                    <div class="px-3 row">
+                        <div class="col-3">
+                            <img src="{{ asset($settings['logo_path']) }}" alt="logo" height="100px">
+                            <button type="button" class="btn btn-sm btn-outline-primary show-dropify" data-name="logo">Değiştir</button>
+                        </div>
+                    </div>
+                </div>
 
                 <input class="form-control mb-2" type='text' name='title' value='{{ $settings['title'] }}'>
-                <input class="form-control mb-2" type='text' name='favicon_path' value='{{ $settings['favicon_path'] }}'>
-                <input class="form-control mb-2" type='text' name='logo_img_path' value='{{ $settings['logo_img_path'] }}'>
                 <textarea class="form-control mb-2" type='text' name='description' value=''>{{ $settings['description'] }}</textarea>
                 <div class="border p-1" id="meta_tags">
                     @php
@@ -56,8 +103,10 @@
                 </div>
             </form>
         </div>
+
     </div>
     <script>
+        // For social_media and met_tags
         let meta_count = Number("{{ $meta_count }}");
         let social_media_count = Number("{{ $social_media_count }}");
 
