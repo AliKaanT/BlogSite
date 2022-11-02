@@ -18,4 +18,9 @@ class SiteSettings extends Model
         'meta_tags',
         'social_medias',
     ];
+
+    protected $casts = [
+        'meta_tags' => 'json',
+        'social_medias' => 'json',
+    ];
 }

@@ -1,26 +1,17 @@
-{{-- @php
-    $item = [
-        'img' => 'admin/site/img/favicon.ico',
-        'title' => 'merhaba bı bri bpıst',
-        'categories' => ['1', '2', '3'],
-        'preview-content' => 'lorem ipsum dolor sit amet, consectetur adipiscing, sed do eiusmod tempor incididunt ut labore et',
-    ];
-@endphp --}}
-
 <div class="col-lg-12">
     <div class="blog-post">
         <div class="blog-thumb">
-            <img src={{ asset($item['img']) }} alt="" style="max-height: 350px; object-fit : cover">
+            <img src={{ asset($item->img) }} alt="" style="max-height: 350px; object-fit : cover">
         </div>
         <div class="down-content">
             <a href="post-details.html">
-                <h4>{{ $item['title'] }}i</h4>
+                <h4>{{ $item->title }}i</h4>
             </a>
             <ul class="post-info">
-                <li><a href="#">May 31, 2020</a></li>
+                <li><a>{{$item->posted_at}}</a></li>
             </ul>
             <p>
-                {{ $item['preview-content'] }}
+                {{ $item->preview_content }}...
             </p>
             <div class="post-options">
                 <div class="row">
@@ -29,10 +20,9 @@
                             <!--  Categories -->
 
                             <li><i class="fa fa-tags"></i></li>
-                            @foreach ($item['categories'] as $index)
-                                <li><a href="#">{{ $index }}</a></li>
+                            @foreach ($item->categories as $key => $value)
+                                <li>{{$key == 0 ? '' : ','}} <a href="#">{{ $value }}</a></li>
                             @endforeach
-
 
                             <!--  Categories -->
                         </ul>

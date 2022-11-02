@@ -14,7 +14,7 @@ class HighlightedPosts extends Component
      */
     public function __construct($item)
     {
-        $this->item = (array)json_decode($item);
+        $this->item = json_decode($item);
     }
 
 
@@ -26,6 +26,6 @@ class HighlightedPosts extends Component
      */
     public function render()
     {
-        return view('site.components.highlighted_posts');
+        return view('site.components.highlighted_posts', ['item' => $this->item]);
     }
 }

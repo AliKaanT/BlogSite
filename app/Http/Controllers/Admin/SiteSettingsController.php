@@ -74,8 +74,8 @@ class SiteSettingsController extends Controller
 
         $newSettings['title'] = $request['title'];
         $newSettings['description'] = $request['description'];
-        $newSettings['meta_tags'] = json_encode($meta_tags);
-        $newSettings['social_medias'] = json_encode($social_medias);
+        $newSettings['meta_tags'] = $meta_tags;
+        $newSettings['social_medias'] = $social_medias;
 
         $newSettings->save();
 

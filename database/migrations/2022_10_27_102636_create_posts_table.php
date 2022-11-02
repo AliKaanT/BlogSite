@@ -4,7 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class extends Migration
+{
     /**
      * Run the migrations.
      *
@@ -15,10 +16,12 @@ return new class extends Migration {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->longText('description');
+            $table->longText('content');
+            $table->longText('preview_content');
             $table->json('image_paths')->nullable();
             $table->integer('active')->default('1');
             $table->integer('highlight')->default('0');
+            $table->timestamp('posted_at');
             $table->timestamps();
         });
     }

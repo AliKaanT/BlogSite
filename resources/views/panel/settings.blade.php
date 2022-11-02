@@ -31,7 +31,7 @@
     <div class="pt-5 container d-flex justify-content-center my-5">
         <div class="w-75">
 
-            <form enctype="multipart/form-data" action="{{ route('panel.settings_post') }}" method="POST" target="__blank">
+            <form enctype="multipart/form-data" action="{{ route('panel.settings_update') }}" method="POST">
 
                 {{-- <input class="form-control mb-2 dropify" type='file'> --}}
 
