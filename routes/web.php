@@ -19,30 +19,38 @@ use App\Http\Controllers\Admin\SiteSettingsController;
  | contains the "web" middleware group. Now create something great!
  |
  */
-
+Route::get(
+    '/', function () {
+        return view('site/index');
+    }
+);
 //REQUESTS WHICH RETURNS VIEW
 Route::get('panel/login', [PanelViewController::class, 'login'])->name('login')->middleware('guest');
 
 //POST REQUESTS
 Route::post('panel/login', [AuthController::class, 'login']);
 
-Route::post('post/settings', function (Request $request) {
-    return $request;
-});
+Route::post(
+    'post/settings', function (Request $request) {
+        return $request;
+    }
+);
 
-Route::group(['prefix' => 'panel', 'as' => 'panel.', 'middleware' => ['auth:admin']], function () {
+Route::group(
+    ['prefix' => 'panel', 'as' => 'panel.', 'middleware' => ['auth:admin']], function () {
 
-    //Get requests
-    Route::get('/', [PanelViewController::class, 'index'])->name('panel');
-    Route::get('/settings', [PanelViewController::class, 'settings'])->name('settings');
-    Route::get('/pages', [ /***********************************/])->name('pages');
-    Route::get('/categories', [ /***********************************/])->name('categories');
-    Route::get('/posts', [ /***********************************/])->name('posts');
+        //Get requests
+        Route::get('/', [PanelViewController::class, 'index'])->name('panel');
+        Route::get('/settings', [PanelViewController::class, 'settings'])->name('settings');
+        Route::get('/pages', [ /***********************************/])->name('pages');
+        Route::get('/categories', [ /***********************************/])->name('categories');
+        Route::get('/posts', [ /***********************************/])->name('posts');
 
 
-    // Post requests
-    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-    Route::post('/settings', [SiteSettingsController::class, 'update'])->name('settings_post');
-});
+        // Post requests
+        Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+        Route::post('/settings', [SiteSettingsController::class, 'update'])->name('settings_post');
+    }
+);
 
 // title slug content image created updated
