@@ -1,19 +1,27 @@
+{{-- @php
+    $item = [
+        'img' => 'admin/site/img/favicon.ico',
+        'title' => 'merhaba bı bri bpıst',
+        'categories' => ['1', '2', '3'],
+        'preview-content' => 'lorem ipsum dolor sit amet, consectetur adipiscing, sed do eiusmod tempor incididunt ut labore et',
+    ];
+@endphp --}}
+
 <div class="col-lg-12">
     <div class="blog-post">
         <div class="blog-thumb">
-            <img src="assets/images/blog-post-01.jpg" alt="">
+            <img src={{ asset($item['img']) }} alt="" style="max-height: 350px; object-fit : cover">
         </div>
         <div class="down-content">
             <a href="post-details.html">
-                <h4>Best Başlık for Blog Sitesi</h4>
+                <h4>{{ $item['title'] }}i</h4>
             </a>
             <ul class="post-info">
-                <li><a href="#">Admin</a></li>
                 <li><a href="#">May 31, 2020</a></li>
-                <li><a href="#">12 Comments</a></li>
             </ul>
-            <p>Stand Blog is a free HTML CSS template for your CMS theme. You can easily adapt or customize it for any kind of CMS or website builder. You are allowed to use it for your business. You are NOT allowed to re-distribute the template ZIP file on any template collection site for the
-                download purpose. <a rel="nofollow" href="https://templatemo.com/contact" target="_parent">Contact TemplateMo</a> for more info. Thank you.</p>
+            <p>
+                {{ $item['preview-content'] }}
+            </p>
             <div class="post-options">
                 <div class="row">
                     <div class="col-6">
@@ -21,8 +29,9 @@
                             <!--  Categories -->
 
                             <li><i class="fa fa-tags"></i></li>
-                            <li><a href="#">Beauty</a>,</li>
-                            <li><a href="#">Nature</a></li>
+                            @foreach ($item['categories'] as $index)
+                                <li><a href="#">{{ $index }}</a></li>
+                            @endforeach
 
 
                             <!--  Categories -->
