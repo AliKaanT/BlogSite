@@ -25,7 +25,7 @@ class PostSeeder extends Seeder
             'preview_content' => substr($content, 0, 128),
             'posted_at' => Carbon::parse('now - 1days'),
             'images' => ['site/img/2.png'],
-            'highlight' => '0',
+            'highlight' => '1',
             'is_active' => '1',
         ]);
         Post::create([
@@ -36,7 +36,7 @@ class PostSeeder extends Seeder
             'posted_at' => Carbon::parse('now - 2days'),
             'images' => ['site/img/1.png'],
             'highlight' => '1',
-            'is_active' => '0',
+            'is_active' => '1',
         ]);
         Post::create([
             'title' => "Roketler nasıl çalışır",
@@ -66,7 +66,7 @@ class PostSeeder extends Seeder
             'posted_at' => Carbon::parse('now - 5days'),
             'images' => ['site/img/5.png'],
             'highlight' => '0',
-            'is_active' => '0',
+            'is_active' => '1',
         ]);
     }
 }
