@@ -5,20 +5,25 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="TemplateMo">
+    <meta name="description" content="{{$settings->description}}">
+
+    @foreach ($settings->meta_tags as $item)
+        {!! $item !!}
+    @endforeach
+
+    <link rel="shortcut icon" href="{{ asset($settings->favicon_path) }}" type="image/x-icon">
+
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&display=swap" rel="stylesheet">
 
-    <title>Stand CSS Blog by TemplateMo</title>
+    <title> {{ $settings->title }}</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="{{asset('site/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
-
+    <link href="{{ asset('site/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
 
     <!-- Additional CSS Files -->
-    <link rel="stylesheet" href="{{asset('site/assets/css/fontawesome.css')}}">
-    <link rel="stylesheet" href="{{asset('site/assets/css/templatemo-stand-blog.css')}}">
-    <link rel="stylesheet" href="{{asset('site/assets/css/owl.css')}}">
+    <link rel="stylesheet" href="{{ asset('site/assets/css/fontawesome.css') }}">
+    <link rel="stylesheet" href="{{ asset('site/assets/css/templatemo-stand-blog.css') }}">
+    <link rel="stylesheet" href="{{ asset('site/assets/css/owl.css') }}">
     <!--
 
 TemplateMo 551 Stand Blog
@@ -44,31 +49,28 @@ https://templatemo.com/tm-551-stand-blog
     <header class="">
         <nav class="navbar navbar-expand-lg">
             <div class="container">
-                <a class="navbar-brand" href="index.html">
-                    <h2>Stand Blog<em>.</em></h2>
+                <a class="navbar-brand" href="{{ route('index') }}">
+                    <img src="{{ asset($settings->logo_path) }}" alt="" height="65px">
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="index.html">Home
-                                <span class="sr-only">(current)</span>
-                            </a>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('index') }}">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="about.html">About Us</a>
+                            <a class="nav-link" href="{{ route('categories') }}">Kategoriler</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="blog.html">Blog Entries</a>
+                            <a class="nav-link" href="{{ route('posts') }} ">Gönderiler</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="post-details.html">Post Details</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="contact.html">Contact Us</a>
-                        </li>
+                        @foreach ($pages as $page)
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('additional_pages', $page->name) }} ">{{ $page->name }}</a>
+                            </li>
+                        @endforeach
                     </ul>
                 </div>
             </div>
@@ -88,11 +90,9 @@ https://templatemo.com/tm-551-stand-blog
             <div class="row">
                 <div class="col-lg-12">
                     <ul class="social-icons">
-                        <li><a href="#">Facebook</a></li>
-                        <li><a href="#">Twitter</a></li>
-                        <li><a href="#">Behance</a></li>
-                        <li><a href="#">Linkedin</a></li>
-                        <li><a href="#">Dribbble</a></li>
+                        @foreach ($settings->social_medias as $key => $value)
+                            <li><a href="{{ $value }}">{{ $key }}</a></li>
+                        @endforeach
                     </ul>
                 </div>
             </div>
@@ -100,15 +100,15 @@ https://templatemo.com/tm-551-stand-blog
     </footer>
 
     <!-- Bootstrap core JavaScript -->
-    <script src="{{asset('site/vendor/jquery/jquery.min.js')}}"></script>
-    <script src="{{asset('site/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{ asset('site/vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('site/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
     <!-- Additional Scripts -->
-    <script src="{{asset('site/assets/js/custom.js')}}"></script>
-    <script src="{{asset('site/assets/js/owl.js')}}"></script>
-    <script src="{{asset('site/assets/js/slick.js')}}"></script>
-    <script src="{{asset('site/assets/js/isotope.js')}}"></script>
-    <script src="{{asset('site/assets/js/accordions.js')}}"></script>
+    <script src="{{ asset('site/assets/js/custom.js') }}"></script>
+    <script src="{{ asset('site/assets/js/owl.js') }}"></script>
+    <script src="{{ asset('site/assets/js/slick.js') }}"></script>
+    <script src="{{ asset('site/assets/js/isotope.js') }}"></script>
+    <script src="{{ asset('site/assets/js/accordions.js') }}"></script>
 
     <script language="text/Javascript">
         cleared[0] = cleared[1] = cleared[2] = 0; //set a cleared flag for each field

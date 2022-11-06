@@ -9,8 +9,9 @@
             @endif
 
             <x-slider_item :item="json_encode([
-                'img' => 'site/assets/images/banner-item-03.jpg',
+                'img' => $post->images[0],
                 'title' => $post->title,
+                'slug' => $post->slug,
                 'categories' => $post->categories,
             ])"></x-slider_item>
         @endforeach

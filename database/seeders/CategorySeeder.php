@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\Category;
 use Illuminate\Database\Seeder;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class CategorySeeder extends Seeder
 {
@@ -15,10 +14,18 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        $arr = ['bilim', 'uzay', 'ulaşım', 'teknoloji'];
-        foreach ($arr as $value) {
+        $actives = ['bilim', 'uzay', 'ulaşım', 'teknoloji', 'yatırım'];
+        $passives = ['arablar', 'spor', 'seyahat'];
+        foreach ($actives as $value) {
             Category::create([
                 'name' => $value,
+                'is_active' => '1',
+            ]);
+        }
+        foreach ($passives as $value) {
+            Category::create([
+                'name' => $value,
+                'is_active' => '0',
             ]);
         }
     }

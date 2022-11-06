@@ -16,12 +16,13 @@ return new class extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->string('slug')->default('slug-txt-merhaba');
             $table->longText('content');
             $table->longText('preview_content');
-            $table->json('image_paths')->nullable();
-            $table->integer('active')->default('1');
-            $table->integer('highlight')->default('0');
+            $table->json('images')->nullable();
             $table->timestamp('posted_at');
+            $table->integer('is_active')->default('1');
+            $table->integer('highlight')->default('0');
             $table->timestamps();
         });
     }

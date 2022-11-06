@@ -21,12 +21,13 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-            $this->call([
-                PostSeeder::class,
-                CategorySeeder::class,
-                PostCategoryLinkSeeder::class,
-                AdminSeeder::class,
-                SiteSettingsSeeder::class,
-            ]);
+        $this->call([
+            PostSeeder::class,
+            CategorySeeder::class,
+            PostCategoryLinkSeeder::class,
+            AdminSeeder::class,
+            SiteSettingsSeeder::class,
+            PageSeeder::class,
+        ]);
     }
 }

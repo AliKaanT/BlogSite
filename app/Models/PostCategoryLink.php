@@ -9,5 +9,9 @@ class PostCategoryLink extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'post_id',
+        'category_id',
+    ];
     protected $table = 'post_category_link';
 }

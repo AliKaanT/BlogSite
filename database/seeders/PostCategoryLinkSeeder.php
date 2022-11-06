@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\PostCategoryLink;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class PostCategoryLinkSeeder extends Seeder
@@ -30,7 +29,7 @@ class PostCategoryLinkSeeder extends Seeder
         foreach ($links as $value) {
             PostCategoryLink::create([
                 'post_id' => $value[0],
-                'category_id' => $value[1]
+                'category_id' => $value[1],
             ]);
         }
     }

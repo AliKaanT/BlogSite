@@ -4,29 +4,57 @@ namespace App\Http\Controllers\Site;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Page;
 use App\Models\Post;
+use App\Models\SiteSettings;
 use Illuminate\Http\Request;
 
 class SiteViewController extends Controller
 {
 
+    private $defaults;
+    private $settings;
+    public function __construct()
+    {
+        $this->defaults['settings'] = SiteSettings::first();
+        $this->defaults['recent_posts'] = Post::orderBy('posted_at', 'DESC')->get()->take(3);
+        $this->defaults['categories'] = Category::withCount(['posts'])->where('is_active', '1')->get();
+        $this->defaults['pages'] = Page::where('is_active', '1')->get(['id', 'name']);
+    }
     public function index(Request $request)
     {
-        $hl_posts = Post::where('highlight', "1")->with('categories:name')->orderBy('posted_at', 'DESC')->get();
-
-        foreach ($hl_posts as $key => $value) { // Kategorileri bir array haline çeviriyoruz
-            $tmp = [];
-            foreach ($value['categories'] as $v) {
-                $tmp[] = $v['name'];
-            };
-            unset($hl_posts[$key]['categories']); // Overwrite yapmama izin vermiyor ?????
-            $hl_posts[$key]['categories'] = $tmp;
-        }
-
-        $recent_posts = Post::orderBy('posted_at', 'DESC')->get()->take(3);
-        $categories = Category::where('is_active','1')->get(['id', 'name']);
-        // return $categories;
-        return view('site/index', compact('hl_posts', 'recent_posts', 'categories'));
+        $hl_posts = Post::where('highlight', "1")->with('categories')->orderBy('posted_at', 'DESC')->get();
+        return view('site/index', compact('hl_posts'))->with($this->defaults);
     }
 
+    public function posts(Request $request)
+    {
+        $posts = Post::where('is_active', '1')->with('categories')->get();
+        return view('site/posts', compact('posts'))->with($this->defaults);
+
+    }
+    public function single_post(Request $request, $slug)
+    {
+        $post = Post::where(['slug' => $slug, 'is_active' => '1'])->with('categories:name,id')->firstOrFail();
+        return view('site/single_post', compact('post'))->with($this->defaults);
+    }
+
+    public function categories(Request $request)
+    {
+        $categories = Category::withCount(['posts'])->where('is_active', '1')->get();
+        return view('site/categories', compact('categories'))->with($this->defaults);
+    }
+
+    public function single_category(Request $request, $id)
+    {
+        $posts = Category::where(['id' => $id, 'is_active' => '1'])->firstOrFail()->posts()->where('is_active', '1')->with('categories')->get();
+        $category = Category::where(['id' => $id, 'is_active' => '1'])->firstOrFail();
+        return view('site/single_category', compact('posts','category'))->with($this->defaults);
+    }
+
+    public function additional_pages(Request $request, $name)
+    {
+        $page = Page::where(['name' => $name, 'is_active' => '1'])->firstOrFail();
+        return view('site/pages', compact('page'))->with($this->defaults);
+    }
 }

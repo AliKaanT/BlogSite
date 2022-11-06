@@ -9,14 +9,15 @@ use Illuminate\Support\Facades\Validator;
 
 class CategoryController extends Controller
 {
-    function new (Request $request) {
+    public function create(Request $request)
+    {
 
         $validation = Validator::make($request->all(), [
             'name' => 'unique:categories|required',
         ]);
 
         if ($validation->fails()) {
-            $errors = (array)$validation->errors()->messages();
+            $errors = (array) $validation->errors()->messages();
             $errors = $errors['name'];
         } else {
             $errors = null;
@@ -28,7 +29,7 @@ class CategoryController extends Controller
         return redirect()->back()->withErrors(['msg' => $errors]);
     }
 
-    public function update(Request $request)
+    public function activityUpdate(Request $request)
     {
 
         $validation = Validator::make($request->all(), [
@@ -44,5 +45,26 @@ class CategoryController extends Controller
 
         return redirect()->back();
 
+    }
+    public function update(Request $request)
+    {
+        $validation = Validator::make($request->all(), [
+            'id' => 'required',
+            'name' => 'required|unique:categories',
+        ]);
+
+        if ($validation->fails()) {
+            return redirect()->back()->withErrors(['msg' => json_encode($validation->errors())]);
+        }
+
+        Category::where('id', $request->id)->update(['name' => $request->name]);
+
+        return redirect()->back();
+    }
+
+    public function delete(Request $request)
+    {
+        Category::where('id', $request->id)->delete();
+        return redirect()->route('panel.categories');
     }
 }

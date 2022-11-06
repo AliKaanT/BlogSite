@@ -46,12 +46,12 @@ jQuery( document ).ready(function( $ ) {
                         items: 1,
                         margin: 0
                     },
-                    576: {
-                        items: 3,
-                        margin: 20
+                    712: {
+                        items: 1,
+                        margin: 0
                     },
                     992: {
-                        items: 5,
+                        items: 2,
                         margin: 30
                     }
                 }

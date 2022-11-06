@@ -2,7 +2,7 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('panel.panel') }}">
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-laugh-wink"></i>
         </div>
@@ -62,8 +62,23 @@
     </li>
 
     <!-- Divider -->
+    <hr class="sidebar-divider d-none d-md-block">
+
+    <div class="sidebar-heading">
+        Additional
+    </div>
 
 
+    <li class="nav-item ">
+        <a class="nav-link" href="{{ route('panel.create_post') }}">
+            <i class="fas fa-fw fa-plus"></i>
+            <span>Yeni Gönderi</span></a>
+    </li>
+    <li class="nav-item ">
+        <a class="nav-link" href="{{ route('panel.create_page') }}">
+            <i class="fas fa-fw fa-plus"></i>
+            <span>Yeni Sayfa</span></a>
+    </li>
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
 

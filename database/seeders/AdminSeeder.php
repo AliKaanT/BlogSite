@@ -19,12 +19,12 @@ class AdminSeeder extends Seeder
         Admin::create([
             'name' => 'admin',
             'email' => 'admin@admin.com',
-            'password' => Hash::make('123')
+            'password' => bcrypt('123')
         ]);
         Admin::create([
             'name' => 'admin2',
             'email' => 'admin2@admin.com',
-            'password' => Hash::make('123')
+            'password' => bcrypt('123')
         ]);
     }
 }
