@@ -23,7 +23,7 @@ class SiteViewController extends Controller
     }
     public function index(Request $request)
     {
-        $hl_posts = Post::where('highlight', "1")->with('categories')->orderBy('posted_at', 'DESC')->get();
+        $hl_posts = Post::where(['highlight' => "1", 'is_active' => 1])->with('categories')->orderBy('posted_at', 'DESC')->get();
         return view('site/index', compact('hl_posts'))->with($this->defaults);
     }
 
