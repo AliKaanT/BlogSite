@@ -31,6 +31,7 @@
                         <td>
                             <div class="custom-control custom-switch">
                                 <form action="{{ route('panel.post_activity_update') }}" method="POST">
+                                    @csrf
                                     <input type="text" name="id" value="{{ $post->id }}" hidden>
                                     @if ($post->is_active)
                                         <input type="text" name="value" value="0" hidden>
@@ -47,6 +48,7 @@
                         <td>
                             <div class="custom-control custom-switch">
                                 <form action="{{ route('panel.post_highlight_update') }}" method="POST">
+                                    @csrf
                                     <input type="text" name="id" value="{{ $post->id }}" hidden>
                                     @if ($post->highlight)
                                         <input type="text" name="value" value="0" hidden>

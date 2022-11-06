@@ -71,6 +71,7 @@
         @endif
 
         <form action="{{ route('panel.post_create') }}" method="POST" enctype="multipart/form-data">
+            @csrf
             <div class="d-none" id="remove_images">
             </div>
             <div class="border p-1 m-2">

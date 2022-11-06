@@ -43,6 +43,7 @@ Route::group(
         Route::get('/', [PanelViewController::class, 'index'])->name('panel');
 
         Route::get('/settings', [PanelViewController::class, 'settings'])->name('settings');
+        Route::get('/profile', [PanelViewController::class, 'profile'])->name('profile');
 
         Route::get('/categories', [PanelViewController::class, 'categories'])->name('categories');
         Route::get('/category/{id}', [PanelViewController::class, 'edit_category'])->name('edit_category');
@@ -59,6 +60,7 @@ Route::group(
         Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
         Route::post('/settingsUpdate', [SiteSettingsController::class, 'update'])->name('settings_update');
+        Route::post('/profileUpdate', [AuthController::class, 'update'])->name('profile_update');
 
         Route::post('/categoryCreate', [CategoryController::class, 'create'])->name('category_create');
         Route::post('/categoryUpdate', [CategoryController::class, 'update'])->name('category_update');

@@ -24,6 +24,7 @@
                         <td>
                             <div class="custom-control custom-switch">
                                 <form action="{{ route('panel.category_activity_update') }}" method="POST">
+                                    @csrf
                                     <input type="text" name="id" value="{{ $item->id }}" hidden>
                                     @if ($item->is_active)
                                         <input type="text" name="value" value="0" hidden>
@@ -37,7 +38,7 @@
                                 </form>
                             </div>
                         </td>
-                        <td> <a href="{{route('panel.edit_category',$item->id)}}"><button class="btn btn-sm btn-warning">Edit</button></a> </td>
+                        <td> <a href="{{ route('panel.edit_category', $item->id) }}"><button class="btn btn-sm btn-warning">Edit</button></a> </td>
                     </tr>
                 @endforeach
             </tbody>
@@ -45,6 +46,7 @@
         </table>
         <div>
             <form action="{{ route('panel.category_create') }}" class="d-flex" method="post">
+                @csrf
                 <input type="text" name="name" class="form-control m-2 w-auto" required>
                 <button class="btn btn-success m-2" onclick="summonForm(this)">Ekle +</button>
             </form>

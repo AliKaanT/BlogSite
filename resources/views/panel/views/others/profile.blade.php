@@ -22,40 +22,30 @@
             </div>
         @endif
 
-        <form action="{{ route('panel.page_update') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('panel.profile_update') }}" method="POST">
             @csrf
-            <input type="hidden" name="id" value="{{ $page->id }}">
+            <input type="hidden" name="id" value="{{ $user->id }}">
             <div class="border p-1 m-2">
                 <div>Name</div>
-                <input name="name" type="text" class="form-control m-2" value="{{ $page->name }}">
+                <input name="name" type="text" class="form-control m-2" value="{{ $user->name }}">
             </div>
             {{-- <div class="border p-1 m-2"></div> --}}
             <div class="border p-1 m-2">
-
-                <div class="mb-2"> Content </div>
-                <textarea name="content" id="summernote">     
-                    {{ $page->content }}
-                </textarea>
+                <div class="mb-2"> Email </div>
+                <input type="email" name="email" class="form-control m-2" value="{{ $user->email }}">
             </div>
-
+            <div class="border p-1 m-2">
+                <div class="mb-2"> Şifre değiştir (değiştirmek istemiyorsanız boş bırakın) </div>
+                <input type="text" class="form-control m-2" name="new_pwd" placeholder="Yeni şifreniz">
+                <input type="text" class="form-control m-2" name="new_pwd_rpt" placeholder="Yeni şifreniz tekrar">
+            </div>
+            <div class="border p-1 m-2">
+                <div>Onaylama</div>
+                <input type="text" class="form-control m-2" name="password" placeholder="Mevcut şifreniz">
+            </div>
             <button class="btn btn-success m-2">Kaydet</button>
         </form>
-        <div class="p-1 m-2">
-            <form action="{{ route('panel.page_delete') }}" method="POST">
-                @csrf
-                <input type="hidden" name="id" value="{{ $page->id }}">
-                <button class="btn btn-danger ">Sayfayı sil X</button>
-            </form>
-        </div>
     </div>
-
-    <script>
-        $('#summernote').summernote({
-            placeholder: 'Hello Bootstrap 4',
-            tabsize: 2,
-            height: 500
-        });
-    </script>
 
     </html>
 @endsection

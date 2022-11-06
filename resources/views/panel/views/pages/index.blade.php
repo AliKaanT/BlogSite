@@ -21,6 +21,7 @@
                         <td>
                             <div class="custom-control custom-switch">
                                 <form action="{{ route('panel.page_activity_update') }}" method="POST">
+                                    @csrf
                                     <input type="text" name="id" value="{{ $item->id }}" hidden>
                                     @if ($item->is_active)
                                         <input type="text" name="value" value="0" hidden>

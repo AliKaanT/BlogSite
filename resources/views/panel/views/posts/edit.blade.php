@@ -71,6 +71,7 @@
             </div>
         @endif
         <form action="{{ route('panel.post_update') }}" method="POST" enctype="multipart/form-data">
+            @csrf
             <input type="text" name="id" value="{{ $post->id }}" hidden>
             <div class="d-none" id="remove_images">
             </div>
@@ -135,6 +136,7 @@
         </form>
         <div class="p-1 m-2">
             <form action="{{ route('panel.post_delete') }}" method="POST">
+                @csrf
                 <input type="hidden" name="id" value="{{ $post->id }}">
                 <button class="btn btn-danger ">Gönderiyi sil X</button>
             </form>

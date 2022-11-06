@@ -70,6 +70,7 @@
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
 
                     <form action="/panel/logout" method="POST">
+                        @csrf
                         <button class="btn btn-primary" href="{{ route('panel.logout') }}">Logout</button>
                     </form>
                 </div>
@@ -78,7 +79,7 @@
     </div>
 
 
-    
+
     <!-- Bootstrap core JavaScript-->
     <script src="{{ asset('admin/vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('admin/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>

@@ -12,6 +12,7 @@
         @endif
 
         <form action="{{ route('panel.category_update') }}" method="POST">
+            @csrf
             <input type="hidden" name="id" value="{{ $category->id }}">
             <div class="border p-1 m-2">
                 <div>Name</div>
@@ -22,6 +23,7 @@
         </form>
         <div class="p-1 m-2">
             <form action="{{ route('panel.category_delete') }}" method="POST">
+                @csrf
                 <input type="hidden" name="id" value="{{ $category->id }}">
                 <button class="btn btn-danger ">Kategoriyi sil X</button>
             </form>

@@ -23,8 +23,8 @@
         <div class="w-75">
 
             <form enctype="multipart/form-data" action="{{ route('panel.settings_update') }}" method="POST">
-
-                {{-- <input class="form-control mb-2 dropify" type='file'> --}}
+                @csrf
+                <input class="form-control mb-2 dropify" type='file'>
 
 
                 <div class="border p-1 m-2" id="favicon">

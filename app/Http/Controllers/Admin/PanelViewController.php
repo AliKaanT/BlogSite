@@ -8,6 +8,7 @@ use App\Models\Page;
 use App\Models\Post;
 use App\Models\SiteSettings;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PanelViewController extends Controller
 {
@@ -24,6 +25,12 @@ class PanelViewController extends Controller
     {
         $settings = SiteSettings::first();
         return view('panel.views.others.settings', ['settings' => ($settings)]);
+    }
+
+    public function profile(Request $request)
+    {
+        $user = Auth::guard('admin')->user();
+        return view('panel.views.others.profile', compact('user'));
     }
 
     /**CATEGORIES**/

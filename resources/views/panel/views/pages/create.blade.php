@@ -24,6 +24,7 @@
         @endif
 
         <form action="{{ route('panel.page_create') }}" method="POST" enctype="multipart/form-data">
+            @csrf
             <div class="border p-1 m-2">
                 <div>Name</div>
                 <input name="name" type="text" class="form-control m-2">
