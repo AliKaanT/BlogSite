@@ -7,7 +7,7 @@
             </a>
             <ul class="post-info">
                 @foreach ($item->categories as $value)
-                    <li><a href="/category/{{ $value->id }}">{{ $value->name }}</a> </li>
+                    <li><a href="/category/{{ $value->slug }}">{{ $value->name }}</a> </li>
                 @endforeach
             </ul>
         </div>

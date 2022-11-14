@@ -19,7 +19,7 @@ class SiteViewController extends Controller
         $this->defaults['settings'] = SiteSettings::first();
         $this->defaults['recent_posts'] = Post::orderBy('posted_at', 'DESC')->get()->take(3);
         $this->defaults['categories'] = Category::withCount(['posts'])->where('is_active', '1')->get();
-        $this->defaults['pages'] = Page::where('is_active', '1')->get(['id', 'name']);
+        $this->defaults['pages'] = Page::where('is_active', '1')->get(['id', 'name', 'slug']);
     }
     public function index(Request $request)
     {
@@ -45,16 +45,16 @@ class SiteViewController extends Controller
         return view('site/categories', compact('categories'))->with($this->defaults);
     }
 
-    public function single_category(Request $request, $id)
+    public function single_category(Request $request, $slug)
     {
-        $posts = Category::where(['id' => $id, 'is_active' => '1'])->firstOrFail()->posts()->where('is_active', '1')->with('categories')->get();
-        $category = Category::where(['id' => $id, 'is_active' => '1'])->firstOrFail();
-        return view('site/single_category', compact('posts','category'))->with($this->defaults);
-    }
+        $category = Category::where(['slug' => $slug, 'is_active' => '1'])->firstOrFail();
+        $posts = Category::where(['id' => $category->id, 'is_active' => '1'])->firstOrFail()->posts()->where('is_active', '1')->with('categories')->get();
+        return view('site/single_category', compact('posts', 'category'))->with($this->defaults);
+    }   
 
-    public function additional_pages(Request $request, $name)
+    public function additional_pages(Request $request, $slug)
     {
-        $page = Page::where(['name' => $name, 'is_active' => '1'])->firstOrFail();
+        $page = Page::where(['slug' => $slug, 'is_active' => '1'])->firstOrFail();
         return view('site/pages', compact('page'))->with($this->defaults);
     }
 }

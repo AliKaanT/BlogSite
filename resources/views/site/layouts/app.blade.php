@@ -68,7 +68,7 @@ https://templatemo.com/tm-551-stand-blog
                         </li>
                         @foreach ($pages as $page)
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('additional_pages', $page->name) }} ">{{ $page->name }}</a>
+                                <a class="nav-link" href="{{ route('additional_pages', $page->slug) }} ">{{ $page->name }}</a>
                             </li>
                         @endforeach
                     </ul>

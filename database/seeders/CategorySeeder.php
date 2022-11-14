@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Category;
+use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 
 class CategorySeeder extends Seeder
@@ -19,12 +20,14 @@ class CategorySeeder extends Seeder
         foreach ($actives as $value) {
             Category::create([
                 'name' => $value,
+                'slug' => Str::slug($value),
                 'is_active' => '1',
             ]);
         }
         foreach ($passives as $value) {
             Category::create([
                 'name' => $value,
+                'slug' => Str::slug($value),
                 'is_active' => '0',
             ]);
         }

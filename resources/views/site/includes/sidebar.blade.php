@@ -28,7 +28,7 @@
                     <ul>
                         @foreach ($categories as $item)
                             <li>
-                                <a href="{{route('single_category', ['id' => $item->id])}}">
+                                <a href="{{route('single_category', ['slug' => $item->slug])}}">
                                     {{ ucfirst($item->name) }}
                                 </a>
                             </li>

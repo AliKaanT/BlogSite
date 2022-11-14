@@ -20,7 +20,7 @@
                         @foreach ($categories as $key => $category)
                             <tr>
                                 <th>{{ $key + 1 }}</th>
-                                <td><a href="/category/{{ $category->id }}">{{ $category->name }}</a></td>
+                                <td><a href="{{ route('single_category', ['slug' => $category->slug]) }}">{{ $category->name }}</a></td>
                                 <td>{{ $category->posts_count }}</td>
                             </tr>
                         @endforeach

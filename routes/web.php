@@ -28,9 +28,9 @@ Route::get('/post/{slug}', [SiteViewController::class, 'single_post'])->name('si
 Route::get('/posts', [SiteViewController::class, 'posts'])->name('posts');
 
 Route::get('/categories', [SiteViewController::class, 'categories'])->name('categories');
-Route::get('/category/{id}', [SiteViewController::class, 'single_category'])->name('single_category');
+Route::get('/category/{slug}', [SiteViewController::class, 'single_category'])->name('single_category');
 
-Route::get('/page/{name}', [SiteViewController::class, 'additional_pages'])->name('additional_pages');
+Route::get('/page/{slug}', [SiteViewController::class, 'additional_pages'])->name('additional_pages');
 
 //Admin routes
 Route::get('panel/login', [PanelViewController::class, 'login'])->name('login')->middleware('guest');

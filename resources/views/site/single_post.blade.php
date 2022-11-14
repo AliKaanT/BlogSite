@@ -44,7 +44,7 @@
                                                 <div class="col-6">
                                                     <ul class="post-tags">
                                                         @foreach ($post->categories as $category)
-                                                            <li><a href="{{ route('single_category', ['id' => $category->id]) }} ">{{ $category->name }}</a></li>,
+                                                            <li><a href="{{ route('single_category', ['slug' => $category->slug]) }} ">{{ $category->name }}</a></li>,
                                                         @endforeach
                                                     </ul>
                                                 </div>

@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Models\Category;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 
 class CategoryController extends Controller
@@ -23,6 +24,7 @@ class CategoryController extends Controller
             $errors = null;
             Category::create([
                 'name' => $request->name,
+                'slug' => Str::slug($request->name),
             ]);
         }
 
@@ -57,7 +59,10 @@ class CategoryController extends Controller
             return redirect()->back()->withErrors(['msg' => json_encode($validation->errors())]);
         }
 
-        Category::where('id', $request->id)->update(['name' => $request->name]);
+        Category::where('id', $request->id)->update([
+            'name' => $request->name,
+            'slug' => Str::slug($request->name)
+        ]);
 
         return redirect()->back();
     }

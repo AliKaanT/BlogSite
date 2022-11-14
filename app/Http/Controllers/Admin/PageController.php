@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Models\Page;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 
 class PageController extends Controller
@@ -22,6 +23,7 @@ class PageController extends Controller
 
         Page::create([
             'name' => $request->name,
+            'slug' => Str::slug($request->name),
             'content' => $request->content,
         ]);
 
@@ -58,6 +60,7 @@ class PageController extends Controller
 
         Page::where('id', $request->id)->update([
             'name' => $request->name,
+            'slug' => Str::slug($request->name),
             'content' => $request->content,
         ]);
 

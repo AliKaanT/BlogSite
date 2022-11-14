@@ -23,7 +23,7 @@
 
                     <li><i class="fa fa-tags"></i></li>
                     @foreach ($item->categories as $key => $value)
-                        <li>{{ $key == 0 ? '' : ',' }} <a href="{{ route('single_category', ['id' => $value->id]) }}">{{ $value->name }}</a></li>
+                        <li>{{ $key == 0 ? '' : ',' }} <a href="{{ route('single_category', ['slug' => $value->slug]) }}">{{ $value->name }}</a></li>
                     @endforeach
 
                     <!--  Categories -->
