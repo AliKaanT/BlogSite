@@ -20,19 +20,12 @@
                         <td>{{ substr($item->content, 0, 50) }}</td>
                         <td>
                             <div class="custom-control custom-switch">
-                                <form action="{{ route('panel.page_activity_update') }}" method="POST">
-                                    @csrf
-                                    <input type="text" name="id" value="{{ $item->id }}" hidden>
-                                    @if ($item->is_active)
-                                        <input type="text" name="value" value="0" hidden>
-                                        <input checked type="checkbox" class="custom-control-input" id="customSwitches{{ $key }}" onchange="(()=>{this.nextElementSibling.click()})()">
-                                    @else
-                                        <input name="value" value="1" hidden>
-                                        <input type="checkbox" class="custom-control-input" id="customSwitches{{ $key }}" onchange="(()=>{this.nextElementSibling.click()})()">
-                                    @endif
-                                    <button type="submit" style="display: none"></button>
-                                    <label class="custom-control-label" for="customSwitches{{ $key }}">{{ $item->is_active }}</label>
-                                </form>
+                                @if ($item->is_active)
+                                    <input checked type="checkbox" data-item="{{ $item->id }}" class="custom-control-input" id="customSwitches{{ $key }}" onchange="change_activity(this)">
+                                @else
+                                    <input type="checkbox" data-item="{{ $item->id }}" class="custom-control-input" id="customSwitches{{ $key }}" onchange="change_activity(this)">
+                                @endif
+                                <label class="custom-control-label" for="customSwitches{{ $key }}">{{ $item->is_active }}</label>
                             </div>
                         </td>
                         <td> <a href="{{ route('panel.edit_page', $item->id) }}"><button class="btn btn-sm btn-warning">Edit</button></a> </td>
@@ -42,5 +35,19 @@
             </tbody>
 
         </table>
+
     </div>
+    @push('custom_js')
+    <script>
+        function change_activity(e) {
+            value = e.checked;
+            id = e.dataset.item
+            console.dir(value);
+            e.nextElementSibling.innerHTML = +value
+            fetch(`{{ route('panel.page_activity_update') }}?id=${id}&value=${+value}`, {
+                method: "GET"
+            })
+        }
+    </script>
+    @endpush    
 @endsection

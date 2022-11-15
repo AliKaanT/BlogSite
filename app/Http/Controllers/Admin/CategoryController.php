@@ -33,19 +33,17 @@ class CategoryController extends Controller
 
     public function activityUpdate(Request $request)
     {
-
+        // This is a get request
+        
         $validation = Validator::make($request->all(), [
             'id' => 'required',
             'value' => 'in:1,0|required',
         ]);
-
         if ($validation->fails()) {
             exit();
-        }
+        }   
 
         Category::where('id', $request->id)->update(['is_active' => $request->value]);
-
-        return redirect()->back();
 
     }
     public function update(Request $request)

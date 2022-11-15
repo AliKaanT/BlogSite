@@ -30,37 +30,24 @@
                         </td>
                         <td>
                             <div class="custom-control custom-switch">
-                                <form action="{{ route('panel.post_activity_update') }}" method="POST">
-                                    @csrf
-                                    <input type="text" name="id" value="{{ $post->id }}" hidden>
-                                    @if ($post->is_active)
-                                        <input type="text" name="value" value="0" hidden>
-                                        <input checked type="checkbox" class="custom-control-input" id="customSwitches{{ $key }}" onchange="(()=>{this.nextElementSibling.click()})()">
-                                    @else
-                                        <input name="value" value="1" hidden>
-                                        <input type="checkbox" class="custom-control-input" id="customSwitches{{ $key }}" onchange="(()=>{this.nextElementSibling.click()})()">
-                                    @endif
-                                    <button type="submit" style="display: none"></button>
-                                    <label class="custom-control-label" for="customSwitches{{ $key }}">{{ $post->is_active }}</label>
-                                </form>
+
+                                @if ($post->is_active)
+                                    <input checked type="checkbox" data-item={{ $post->id }} class="custom-control-input" id="customSwitches{{ $key }}" onchange="change_activity(this)">
+                                @else
+                                    <input type="checkbox" data-item={{ $post->id }} class="custom-control-input" id="customSwitches{{ $key }}" onchange="change_activity(this)">
+                                @endif
+                                <label class="custom-control-label" for="customSwitches{{ $key }}">{{ $post->is_active }}</label>
+
                             </div>
                         </td>
                         <td>
                             <div class="custom-control custom-switch">
-                                <form action="{{ route('panel.post_highlight_update') }}" method="POST">
-                                    @csrf
-                                    <input type="text" name="id" value="{{ $post->id }}" hidden>
-                                    @if ($post->highlight)
-                                        <input type="text" name="value" value="0" hidden>
-                                        <input checked type="checkbox" class="custom-control-input" id="custom2Switches{{ $key }}" onchange="(()=>{this.nextElementSibling.click()})()">
-                                    @else
-                                        <input name="value" value="1" hidden>
-                                        <input type="checkbox"  class="custom-control-input" id="custom2Switches{{ $key }}" onchange="(()=>{this.nextElementSibling.click()})()">
-                                    @endif
-                                    
-                                    <button type="submit" style="display: none"></button>
-                                    <label class="custom-control-label" for="custom2Switches{{ $key }}">{{ $post->highlight }}</label>
-                                </form>
+                                @if ($post->highlight)
+                                    <input checked type="checkbox" data-item={{ $post->id }} class="custom-control-input" id="custom2Switches{{ $key }}" onchange="change_highliht(this)">
+                                @else
+                                    <input type="checkbox" data-item={{ $post->id }} class="custom-control-input" id="custom2Switches{{ $key }}" onchange="change_highliht(this)">
+                                @endif
+                                <label class="custom-control-label" for="custom2Switches{{ $key }}">{{ $post->highlight }}</label>
                             </div>
                         </td>
                         <td> <a href="{{ route('panel.edit_post', $post->id) }}"><button class="btn btn-sm btn-warning">Edit</button></a> </td>
@@ -70,4 +57,27 @@
 
         </table>
     </div>
+    @push('custom_js')
+        <script>
+            function change_activity(e) {
+                value = e.checked;
+                id = e.dataset.item
+                console.dir(value);
+                e.nextElementSibling.innerHTML = +value
+                fetch(`{{ route('panel.post_activity_update') }}?id=${id}&value=${+value}`, {
+                    method: "GET"
+                })
+            }
+
+            function change_highliht(e) {
+                value = e.checked;
+                id = e.dataset.item
+                console.dir(value);
+                e.nextElementSibling.innerHTML = +value
+                fetch(`{{ route('panel.post_highlight_update') }}?id=${id}&value=${+value}`, {
+                    method: "GET"
+                })
+            }
+        </script>
+    @endpush
 @endsection

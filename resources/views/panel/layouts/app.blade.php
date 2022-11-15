@@ -14,9 +14,8 @@
     <!-- Custom styles for this template-->
     <link href="{{ asset('admin/css/sb-admin-2.min.css') }}" rel="stylesheet">
 
-
     <link rel="stylesheet" href="{{ asset('admin/vendor/dropify/dropify.css') }}">
-
+    @stack('custom_css')
 </head>
 
 <body id="page-top">
@@ -29,7 +28,7 @@
         @include('panel.includes.topbar')
 
         @yield('content')
-
+        
 
     </div>
     <!-- End of Main Content -->
@@ -90,7 +89,7 @@
     <!-- Custom scripts for all pages-->
     <script src="{{ asset('admin/js/sb-admin-2.min.js') }}"></script>
 
-
+    @stack('custom_js')
     @yield('extra_footer_tags')
 </body>
 

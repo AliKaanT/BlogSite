@@ -23,19 +23,12 @@
                         <td>{{ $item->posts_count }}</td>
                         <td>
                             <div class="custom-control custom-switch">
-                                <form action="{{ route('panel.category_activity_update') }}" method="POST">
-                                    @csrf
-                                    <input type="text" name="id" value="{{ $item->id }}" hidden>
-                                    @if ($item->is_active)
-                                        <input type="text" name="value" value="0" hidden>
-                                        <input checked type="checkbox" class="custom-control-input" id="customSwitches{{ $key }}" onchange="(()=>{this.nextElementSibling.click()})()">
-                                    @else
-                                        <input name="value" value="1" hidden>
-                                        <input type="checkbox" class="custom-control-input" id="customSwitches{{ $key }}" onchange="(()=>{this.nextElementSibling.click()})()">
-                                    @endif
-                                    <button type="submit" style="display: none"></button>
-                                    <label class="custom-control-label" for="customSwitches{{ $key }}">{{ $item->is_active }}</label>
-                                </form>
+                                @if ($item->is_active)
+                                    <input checked class="custom-control-input" data-item="{{ $item->id }}" type="checkbox" id="customSwitches{{ $key }}" onchange="change_activity(this)">
+                                @else
+                                    <input class="custom-control-input" data-item="{{ $item->id }}" type="checkbox" id="customSwitches{{ $key }}" onchange="change_activity(this)">
+                                @endif
+                                <label class="custom-control-label" for="customSwitches{{ $key }}">{{ $item->is_active }}</label>
                             </div>
                         </td>
                         <td> <a href="{{ route('panel.edit_category', $item->id) }}"><button class="btn btn-sm btn-warning">Edit</button></a> </td>
@@ -60,5 +53,18 @@
             <!-- Default switch -->
 
         </div>
+        @push('custom_js')
+            <script>
+                function change_activity(e) {
+                    value = e.checked;
+                    id = e.dataset.item
+                    console.dir(value);
+                    e.nextElementSibling.innerHTML = +value
+                    fetch(`{{ route('panel.category_activity_update') }}?id=${id}&value=${+value}`, {
+                        method: "GET"
+                    })
+                }
+            </script>
+        @endpush
     </div>
 @endsection

@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\SiteSettingsController;
 use App\Http\Controllers\Site\SiteViewController;
 use App\Models\Post;
 use Illuminate\Support\Facades\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,8 +20,7 @@ use Illuminate\Support\Facades\Route;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
- */
-
+*/
 //User routes
 Route::get('/', [SiteViewController::class, 'index'])->name('index');
 
@@ -37,7 +37,8 @@ Route::get('panel/login', [PanelViewController::class, 'login'])->name('login')-
 Route::post('panel/login', [AuthController::class, 'login'])->name('post_login');
 
 Route::group(
-    ['prefix' => 'panel', 'as' => 'panel.', 'middleware' => ['auth:admin']], function () {
+    ['prefix' => 'panel', 'as' => 'panel.', 'middleware' => ['auth:admin']],
+    function () {
 
         //Get requests
         Route::get('/', [PanelViewController::class, 'index'])->name('panel');
@@ -65,17 +66,17 @@ Route::group(
         Route::post('/categoryCreate', [CategoryController::class, 'create'])->name('category_create');
         Route::post('/categoryUpdate', [CategoryController::class, 'update'])->name('category_update');
         Route::post('/categoryDelete', [CategoryController::class, 'delete'])->name('category_delete');
-        Route::post('/categoryActivityUpdate', [CategoryController::class, 'activityUpdate'])->name('category_activity_update');
+        Route::get('/categoryActivityUpdate', [CategoryController::class, 'activityUpdate'])->name('category_activity_update');
 
         Route::post('/postCreate', [PostController::class, 'create'])->name('post_create');
         Route::post('/postUpdate', [PostController::class, 'update'])->name('post_update');
         Route::post('/postDelete', [PostController::class, 'delete'])->name('post_delete');
-        Route::post('/postActivityUpdate', [PostController::class, 'activityUpdate'])->name('post_activity_update');
-        Route::post('/postHighlightUpdate', [PostController::class, 'highlightUpdate'])->name('post_highlight_update');
+        Route::get('/postActivityUpdate', [PostController::class, 'activityUpdate'])->name('post_activity_update');
+        Route::get('/postHighlightUpdate', [PostController::class, 'highlightUpdate'])->name('post_highlight_update');
 
         Route::post('/pageCreate', [PageController::class, 'create'])->name('page_create');
         Route::post('/pageUpdate', [PageController::class, 'update'])->name('page_update');
         Route::post('/pageDelete', [PageController::class, 'delete'])->name('page_delete');
-        Route::post('/pageActivityUpdate', [PageController::class, 'activityUpdate'])->name('page_activity_update');
+        Route::get('/pageActivityUpdate', [PageController::class, 'activityUpdate'])->name('page_activity_update');
     }
 );
