@@ -32,8 +32,8 @@
             <div class="col-6">
                 <ul class="post-share">
                     <li><i class="fa fa-share-alt"></i></li>
-                    <li><a href="#">Facebook</a>,</li>
-                    <li><a href="#"> Twitter</a></li>
+                    <li><a href="https://www.facebook.com/sharer/sharer.php?u={{route('single_post', ['slug' => $item->slug])}}" target="__blank">Facebook</a>,</li>
+                    <li><a href="https://twitter.com/intent/tweet?text={{route('single_post', ['slug' => $item->slug])}}" target="__blank"> Twitter</a></li>
                 </ul>
             </div>
         </div>

@@ -35,7 +35,7 @@ class SiteViewController extends Controller
     }
     public function single_post(Request $request, $slug)
     {
-        $post = Post::where(['slug' => $slug, 'is_active' => '1'])->with('categories:name,id')->firstOrFail();
+        $post = Post::where(['slug' => $slug, 'is_active' => '1'])->with('categories:name,id,slug')->firstOrFail();
         return view('site/single_post', compact('post'))->with($this->defaults);
     }
 

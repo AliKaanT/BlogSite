@@ -44,15 +44,15 @@
                                                 <div class="col-6">
                                                     <ul class="post-tags">
                                                         @foreach ($post->categories as $category)
-                                                            <li><a href="{{ route('single_category', ['slug' => $category->slug]) }} ">{{ $category->name }}</a></li>,
+                                                            <li><a href="{{ route('single_category', ['slug' => $category->slug]) }}">{{ $category->name }}</a></li>,
                                                         @endforeach
                                                     </ul>
                                                 </div>
                                                 <div class="col-6">
                                                     <ul class="post-share">
                                                         <li><i class="fa fa-share-alt"></i></li>
-                                                        <li><a href="#">Facebook</a>,</li>
-                                                        <li><a href="#"> Twitter</a></li>
+                                                        <li><a target="__blank" href="https://www.facebook.com/sharer/sharer.php?u={{ route('single_post', ['slug' => $post->slug]) }}">Facebook</a>,</li>
+                                                        <li><a target="__blank" href="https://twitter.com/intent/tweet?text={{ route('single_post', ['slug' => $post->slug]) }}"> Twitter</a></li>
                                                     </ul>
                                                 </div>
                                             </div>
